@@ -25,10 +25,7 @@ public class MovieRepositorySimple implements MovieRepository {
             counter.incrementAndGet(), "Gran Torino", "Clint Eastwood", LocalDate.of(2008, 12, 9)));
     movies.add(
         new Movie(
-            counter.incrementAndGet(),
-            "Taxi Driver",
-            "Martin Scorsese",
-            LocalDate.of(1976, 2, 8)));
+            counter.incrementAndGet(), "Taxi Driver", "Martin Scorsese", LocalDate.of(1976, 2, 8)));
   }
 
   public List<Movie> findAll() {
