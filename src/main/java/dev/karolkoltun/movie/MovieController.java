@@ -15,7 +15,7 @@ public class MovieController {
 
   private MovieRepository movieRepository;
 
-  public MovieController() {
+  MovieController() {
     movieRepository = new MovieRepositorySimple();
   }
 
