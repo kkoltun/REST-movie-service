@@ -6,7 +6,7 @@
     <groupId>dev.karolkoltun</groupId>
     <artifactId>movies</artifactId>
     <version>0.3</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Spring Boot CRUD application</name>
 
     <properties>
