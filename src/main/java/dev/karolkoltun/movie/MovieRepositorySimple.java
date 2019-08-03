@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Component
-public class SimpleMovieRepository implements MovieRepository {
+public class MovieRepositorySimple implements MovieRepository {
 
   private final AtomicLong counter = new AtomicLong();
 

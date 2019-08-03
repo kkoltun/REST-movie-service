@@ -11,7 +11,7 @@ public class MovieController {
   private final MovieRepository movieRepository;
 
   public MovieController() {
-    movieRepository = new SimpleMovieRepository();
+    movieRepository = new MovieRepositorySimple();
   }
 
   @ResponseStatus(value = HttpStatus.NOT_FOUND)

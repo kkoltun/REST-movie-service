@@ -16,7 +16,7 @@ public class MovieValidatedController {
   private MovieRepository movieRepository;
 
   public MovieValidatedController() {
-    movieRepository = new SimpleMovieRepository();
+    movieRepository = new MovieRepositorySimple();
   }
 
   @GetMapping("/movies")

@@ -18,7 +18,7 @@ public class MovieSwaggerController {
   private final MovieRepository movieRepository;
 
   public MovieSwaggerController() {
-    movieRepository = new SimpleMovieRepository();
+    movieRepository = new MovieRepositorySimple();
   }
 
   @ApiOperation(value = "View a list of Movies", response = Movie.class, responseContainer = "List")
