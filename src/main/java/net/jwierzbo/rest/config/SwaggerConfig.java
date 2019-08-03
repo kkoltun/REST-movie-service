@@ -19,29 +19,31 @@ import java.util.Arrays;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .useDefaultResponseMessages(false)
-                .apiInfo(apiInfo())
-                .globalResponseMessage(RequestMethod.GET,
-                        Arrays.asList(new ResponseMessageBuilder()
-                                .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                                .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                                .build()))
-                .select()
-                    .apis(RequestHandlerSelectors.basePackage("net.jwierzbo.rest"))
-                    .paths(PathSelectors.any())
-                .build();
-    }
+  @Bean
+  public Docket api() {
+    return new Docket(DocumentationType.SWAGGER_2)
+        .useDefaultResponseMessages(false)
+        .apiInfo(apiInfo())
+        .globalResponseMessage(
+            RequestMethod.GET,
+            Arrays.asList(
+                new ResponseMessageBuilder()
+                    .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+                    .build()))
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("net.jwierzbo.rest"))
+        .paths(PathSelectors.any())
+        .build();
+  }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title("Favourites movies API")
-                .description("CRUD example REST API to manage list of movies")
-                .contact(new Contact("jwierzbo", "url", "jwierzbo@jwierzbo.net"))
-                .license("MIT")
-                .version("0.1")
-                .build();
-    }
+  private ApiInfo apiInfo() {
+    return new ApiInfoBuilder()
+        .title("Favourites movies API")
+        .description("CRUD example REST API to manage list of movies")
+        .contact(new Contact("jwierzbo", "url", "jwierzbo@jwierzbo.net"))
+        .license("MIT")
+        .version("0.1")
+        .build();
+  }
 }

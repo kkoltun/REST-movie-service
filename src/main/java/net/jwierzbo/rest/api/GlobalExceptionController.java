@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionController {
 
-    @ResponseStatus(value= HttpStatus.NOT_FOUND)
-    @ExceptionHandler(MovieNotFoundException.class)
-    @ResponseBody
-    public String handleAllException(MovieNotFoundException ex) {
-        return "GLOBAL-application handler: " + ex.getMessage();
-    }
+  @ResponseStatus(value = HttpStatus.NOT_FOUND)
+  @ExceptionHandler(MovieNotFoundException.class)
+  @ResponseBody
+  public String handleAllException(MovieNotFoundException ex) {
+    return "GLOBAL-application handler: " + ex.getMessage();
+  }
 }
