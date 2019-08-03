@@ -33,35 +33,37 @@ class Movie {
     this.releaseDate = releaseDate;
   }
 
-  Long getId() {
+  public Movie() {}
+
+  public Long getId() {
     return id;
   }
 
-  void setId(Long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  String getTitle() {
+  public String getTitle() {
     return title;
   }
 
-  void setTitle(String title) {
+  public void setTitle(String title) {
     this.title = title;
   }
 
-  String getDirector() {
+  public String getDirector() {
     return director;
   }
 
-  void setDirector(String director) {
+  public void setDirector(String director) {
     this.director = director;
   }
 
-  LocalDate getReleaseDate() {
+  public LocalDate getReleaseDate() {
     return releaseDate;
   }
 
-  void setReleaseDate(LocalDate releaseDate) {
+  public void setReleaseDate(LocalDate releaseDate) {
     this.releaseDate = releaseDate;
   }
 }
