@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
  *  and @ResponseBody objects instead of generic response
  */
 
-@Api(value = "MovieController", description = "List of favourite Movies")
+@Api(value = "MovieController")
 @RestController
-@RequestMapping("/v2")
-public class MovieSwaggerController {
+@RequestMapping("/swagger")
+public class MovieControllerSwagger {
 
   private final MovieRepository movieRepository;
 
-  public MovieSwaggerController() {
+  public MovieControllerSwagger() {
     movieRepository = new MovieRepositorySimple();
   }
 
