@@ -5,7 +5,7 @@
 
     <groupId>dev.karolkoltun</groupId>
     <artifactId>movies</artifactId>
-    <version>0.3</version>
+    <version>0.4</version>
     <packaging>jar</packaging>
     <name>Spring Boot CRUD application</name>
 
@@ -75,6 +75,12 @@
             <artifactId>spring-boot-devtools</artifactId>
             <version>${spring.boot.version}</version>
             <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.0.13.Final</version>
         </dependency>
     </dependencies>
 
