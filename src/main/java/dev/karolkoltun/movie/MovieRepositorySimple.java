@@ -1,7 +1,5 @@
 package dev.karolkoltun.movie;
 
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +30,11 @@ public class MovieRepositorySimple implements MovieRepository {
   }
 
   public Optional<Movie> findById(Long id) {
-    for (Movie c : movies) {
-      if (c.getId().equals(id)) {
-        return Optional.of(c);
-      }
-    }
+    return movies.stream().filter(m -> m.getId().equals(id)).findFirst();
+  }
 
-    throw new MovieNotFoundException(id);
+  public Movie getById(Long id) throws MovieNotFoundException {
+    return findById(id).orElseThrow(() -> new MovieNotFoundException(id));
   }
 
   public Movie save(Movie movie) {
@@ -48,25 +44,16 @@ public class MovieRepositorySimple implements MovieRepository {
   }
 
   public void deleteById(Long id) {
-    for (Movie c : movies) {
-      if (c.getId().equals(id)) {
-        movies.remove(c);
-      }
-    }
-
-    throw new MovieNotFoundException(id);
+    movies.remove(getById(id));
   }
 
-  public Movie update(Long id, Movie movie) {
-    for (Movie c : movies) {
-      if (c.getId().equals(id)) {
-        movie.setId(c.getId());
-        movies.remove(c);
-        movies.add(movie);
-        return movie;
-      }
-    }
+  public Movie update(Long id, Movie newMovie) {
+    Movie oldMovie = getById(id);
+    int index = movies.indexOf(oldMovie);
 
-    throw new MovieNotFoundException(id);
+    newMovie.setId(id);
+    movies.set(index, newMovie);
+
+    return newMovie;
   }
 }
