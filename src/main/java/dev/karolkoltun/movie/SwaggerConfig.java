@@ -15,6 +15,9 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
+import java.util.Collections;
+
+import static java.util.Collections.singletonList;
 
 @Configuration
 @EnableSwagger2
@@ -26,7 +29,7 @@ public class SwaggerConfig {
         .apiInfo(apiInfo())
         .globalResponseMessage(
             RequestMethod.GET,
-            Arrays.asList(
+            singletonList(
                 new ResponseMessageBuilder()
                     .code(HttpStatus.INTERNAL_SERVER_ERROR.value())
                     .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
