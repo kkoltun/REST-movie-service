@@ -1,13 +1,12 @@
 package net.jwierzbo.rest.api;
 
 import io.swagger.annotations.*;
-import net.jwierzbo.rest.dao.MovieDAO;
+import net.jwierzbo.rest.exception.MovieNotFoundException;
 import net.jwierzbo.rest.model.Movie;
-import org.springframework.beans.factory.annotation.Autowired;
+import net.jwierzbo.rest.repository.MovieRepository;
+import net.jwierzbo.rest.repository.SimpleMovieRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /*
  * This is example Controller class with extended description for SwaggerApi
@@ -20,19 +19,23 @@ import java.util.List;
 @RequestMapping("/v2")
 public class MovieV2SwaggerController {
 
-  @Autowired private MovieDAO movieDAO;
+  private final MovieRepository movieRepository;
+
+  public MovieV2SwaggerController() {
+    movieRepository = new SimpleMovieRepository();
+  }
 
   @ApiOperation(value = "View a list of Movies", response = Movie.class, responseContainer = "List")
   @GetMapping("/movies")
-  public List<Movie> getMovies() {
-    return movieDAO.list();
+  public Iterable<Movie> getMovies() {
+    return movieRepository.findAll();
   }
 
   @ApiOperation(value = "Search a Movie by ID", response = Movie.class)
   @ApiResponses(value = {@ApiResponse(code = 404, message = "Not Found")})
   @GetMapping("/movies/{id}")
   public Movie getMovie(@PathVariable("id") Long id) {
-    return movieDAO.get(id).get();
+    return movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
   }
 
   @ApiOperation(value = "Add new Movie", response = Movie.class)
@@ -53,7 +56,7 @@ public class MovieV2SwaggerController {
   @PostMapping(value = "/movies")
   @ResponseStatus(value = HttpStatus.CREATED)
   public Movie createMovie(@RequestBody Movie movie) {
-    return movieDAO.create(movie);
+    return movieRepository.save(movie);
   }
 
   @ApiOperation(value = "Delete specific movie")
@@ -61,7 +64,7 @@ public class MovieV2SwaggerController {
   @DeleteMapping("/movies/{id}")
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
   public void deleteMovie(@ApiParam(value = "Movie ID", required = true) @PathVariable Long id) {
-    movieDAO.delete(id);
+    movieRepository.deleteById(id);
   }
 
   @ApiResponses(
@@ -71,6 +74,7 @@ public class MovieV2SwaggerController {
       })
   @PutMapping("/movies/{id}")
   public Movie updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
-    return movieDAO.update(id, movie);
+    movie.setId(id);
+    return movieRepository.save(movie);
   }
 }

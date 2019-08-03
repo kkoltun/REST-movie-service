@@ -1,6 +1,7 @@
 package net.jwierzbo.rest.api;
 
-import net.jwierzbo.rest.dao.MovieDAO;
+import net.jwierzbo.rest.repository.MovieRepository;
+import net.jwierzbo.rest.repository.SimpleMovieRepository;
 import net.jwierzbo.rest.exception.MovieNotFoundException;
 import net.jwierzbo.rest.model.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,32 +19,37 @@ import java.util.List;
 @RequestMapping("/v3")
 public class MovieV3ValidController {
 
-  @Autowired private MovieDAO movieDAO;
+  private MovieRepository movieRepository;
+
+  public MovieV3ValidController() {
+    movieRepository = new SimpleMovieRepository();
+  }
 
   @GetMapping("/movies")
-  public List<Movie> getMovies() {
-    return movieDAO.list();
+  public Iterable<Movie> getMovies() {
+    return movieRepository.findAll();
   }
 
   @GetMapping("/movies/{id}")
   public Movie getMovie(@PathVariable("id") Long id) {
-    return movieDAO.get(id).orElseThrow(() -> new MovieNotFoundException(id));
+    return movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
   }
 
   @PostMapping(value = "/movies")
   @ResponseStatus(value = HttpStatus.CREATED)
   public Movie createMovie(@Valid @RequestBody Movie movie) { // Validate input
-    return movieDAO.create(movie);
+    return movieRepository.save(movie);
   }
 
   @DeleteMapping("/movies/{id}")
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
   public void deleteMovie(@Valid @PathVariable Long id) { // Validate input
-    movieDAO.delete(id);
+    movieRepository.deleteById(id);
   }
 
   @PutMapping("/movies/{id}")
   public Movie updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
-    return movieDAO.update(id, movie);
+    movie.setId(id);
+    return movieRepository.save(movie);
   }
 }

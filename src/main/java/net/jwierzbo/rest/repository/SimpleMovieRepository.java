@@ -1,4 +1,4 @@
-package net.jwierzbo.rest.dao;
+package net.jwierzbo.rest.repository;
 
 import net.jwierzbo.rest.exception.MovieNotFoundException;
 import net.jwierzbo.rest.model.Movie;
@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Component
-public class MovieDAO {
+public class SimpleMovieRepository implements MovieRepository {
 
   private final AtomicLong counter = new AtomicLong();
 
@@ -33,11 +33,11 @@ public class MovieDAO {
             LocalDate.of(1976, 02, 8)));
   }
 
-  public List<Movie> list() {
+  public List<Movie> findAll() {
     return movies;
   }
 
-  public Optional<Movie> get(Long id) {
+  public Optional<Movie> findById(Long id) {
     for (Movie c : movies) {
       if (c.getId().equals(id)) {
         return Optional.of(c);
@@ -47,17 +47,16 @@ public class MovieDAO {
     throw new MovieNotFoundException(id);
   }
 
-  public Movie create(Movie movie) {
+  public Movie save(Movie movie) {
     movie.setId(counter.incrementAndGet());
     movies.add(movie);
     return movie;
   }
 
-  public Long delete(Long id) {
+  public void deleteById(Long id) {
     for (Movie c : movies) {
       if (c.getId().equals(id)) {
         movies.remove(c);
-        return id;
       }
     }
 
