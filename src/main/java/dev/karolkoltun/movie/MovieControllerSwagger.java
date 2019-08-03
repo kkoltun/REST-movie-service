@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Api(value = "MovieController")
 @RestController
-@RequestMapping("/swagger")
+@RequestMapping("/documented")
 public class MovieControllerSwagger {
 
   private final MovieRepository movieRepository;
@@ -21,20 +21,20 @@ public class MovieControllerSwagger {
     movieRepository = new MovieRepositorySimple();
   }
 
-  @ApiOperation(value = "View a list of Movies", response = Movie.class, responseContainer = "List")
+  @ApiOperation(value = "Get all movies", response = Movie.class, responseContainer = "List")
   @GetMapping("/movies")
   public Iterable<Movie> getMovies() {
     return movieRepository.findAll();
   }
 
-  @ApiOperation(value = "Search a Movie by ID", response = Movie.class)
+  @ApiOperation(value = "Get a movie by ID", response = Movie.class)
   @ApiResponses(value = {@ApiResponse(code = 404, message = "Not Found")})
   @GetMapping("/movies/{id}")
   public Movie getMovie(@PathVariable("id") Long id) {
     return movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
   }
 
-  @ApiOperation(value = "Add new Movie", response = Movie.class)
+  @ApiOperation(value = "Add a new movie", response = Movie.class)
   @ApiResponses(
       value = {
         @ApiResponse(code = 400, message = "Invalid input"),
@@ -55,7 +55,7 @@ public class MovieControllerSwagger {
     return movieRepository.save(movie);
   }
 
-  @ApiOperation(value = "Delete specific movie")
+  @ApiOperation(value = "Delete a movie by ID")
   @ApiResponses(value = {@ApiResponse(code = 404, message = "Not Found")})
   @DeleteMapping("/movies/{id}")
   @ResponseStatus(value = HttpStatus.NO_CONTENT)
