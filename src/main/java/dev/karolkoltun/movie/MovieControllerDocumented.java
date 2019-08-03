@@ -63,14 +63,38 @@ class MovieControllerDocumented {
     movieRepository.deleteById(id);
   }
 
+  @ApiOperation(value = "Replace a movie under an ID")
   @ApiResponses(
       value = {
         @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found")
       })
   @PutMapping("/movies/{id}")
-  public Movie updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
+  public Movie replaceMovie(@PathVariable Long id, @RequestBody Movie movie) {
     movie.setId(id);
     return movieRepository.save(movie);
+  }
+
+  @ApiOperation(value = "Edit one of the properties of a movie")
+  @ApiResponses(
+      value = {
+          @ApiResponse(code = 400, message = "Bad Request"),
+          @ApiResponse(code = 404, message = "Not Found")
+      })
+  @PatchMapping("/movies/{id}")
+  public Movie updateMovie(@PathVariable Long id, @RequestBody Movie partialMovie) {
+    Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
+
+    if (partialMovie.getDirector() != null) {
+      movie.setDirector(partialMovie.getDirector());
+    }
+    if (partialMovie.getReleaseDate() != null) {
+      movie.setReleaseDate(partialMovie.getReleaseDate());
+    }
+    if (partialMovie.getTitle() != null) {
+      movie.setTitle(partialMovie.getTitle());
+    }
+
+    return movieRepository.update(id, movie);
   }
 }

@@ -42,8 +42,24 @@ public class MovieController {
   }
 
   @PutMapping("/movies/{id}")
-  public Movie updateMovie(@PathVariable Long id, @RequestBody Movie movie) {
-    movie.setId(id);
-    return movieRepository.save(movie);
+  public Movie replaceMovie(@PathVariable Long id, @RequestBody Movie movie) {
+    return movieRepository.update(id, movie);
+  }
+
+  @PatchMapping("/movies/{id}")
+  public Movie updateMovie(@PathVariable Long id, @RequestBody Movie partialMovie) {
+    Movie movie = movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
+
+    if (partialMovie.getDirector() != null) {
+      movie.setDirector(partialMovie.getDirector());
+    }
+    if (partialMovie.getReleaseDate() != null) {
+      movie.setReleaseDate(partialMovie.getReleaseDate());
+    }
+    if (partialMovie.getTitle() != null) {
+      movie.setTitle(partialMovie.getTitle());
+    }
+
+    return movieRepository.update(id, movie);
   }
 }
