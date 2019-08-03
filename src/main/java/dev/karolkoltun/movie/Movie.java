@@ -1,15 +1,15 @@
-package net.jwierzbo.rest.model;
+package dev.karolkoltun.movie;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import dev.karolkoltun.movie.validation.Name;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import net.jwierzbo.rest.validation.Name;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @ApiModel(value = "Movie")
-public class Movie {
+class Movie {
 
   @ApiModelProperty(notes = "The database generated product ID")
   private Long id;
@@ -26,44 +26,42 @@ public class Movie {
   @ApiModelProperty(notes = "Movie premiere date", example = "2018-02-28")
   private LocalDate releaseDate;
 
-  public Movie(long id, String title, String director, LocalDate releaseDate) {
+  Movie(long id, String title, String director, LocalDate releaseDate) {
     this.id = id;
     this.title = title;
     this.director = director;
     this.releaseDate = releaseDate;
   }
 
-  public Movie() {}
-
-  public Long getId() {
+  Long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  void setId(Long id) {
     this.id = id;
   }
 
-  public String getTitle() {
+  String getTitle() {
     return title;
   }
 
-  public void setTitle(String title) {
+  void setTitle(String title) {
     this.title = title;
   }
 
-  public String getDirector() {
+  String getDirector() {
     return director;
   }
 
-  public void setDirector(String director) {
+  void setDirector(String director) {
     this.director = director;
   }
 
-  public LocalDate getReleaseDate() {
+  LocalDate getReleaseDate() {
     return releaseDate;
   }
 
-  public void setReleaseDate(LocalDate releaseDate) {
+  void setReleaseDate(LocalDate releaseDate) {
     this.releaseDate = releaseDate;
   }
 }

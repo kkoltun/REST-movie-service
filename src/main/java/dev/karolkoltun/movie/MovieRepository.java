@@ -1,6 +1,4 @@
-package net.jwierzbo.rest.repository;
-
-import net.jwierzbo.rest.model.Movie;
+package dev.karolkoltun.movie;
 
 import java.util.Optional;
 

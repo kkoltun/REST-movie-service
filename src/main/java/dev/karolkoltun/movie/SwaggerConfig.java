@@ -1,4 +1,4 @@
-package net.jwierzbo.rest.config;
+package dev.karolkoltun.movie;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,7 +32,7 @@ public class SwaggerConfig {
                     .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
                     .build()))
         .select()
-        .apis(RequestHandlerSelectors.basePackage("net.jwierzbo.rest"))
+        .apis(RequestHandlerSelectors.basePackage("dev.karolkoltun"))
         .paths(PathSelectors.any())
         .build();
   }
@@ -40,10 +40,7 @@ public class SwaggerConfig {
   private ApiInfo apiInfo() {
     return new ApiInfoBuilder()
         .title("Favourites movies API")
-        .description("CRUD example REST API to manage list of movies")
-        .contact(new Contact("jwierzbo", "url", "jwierzbo@jwierzbo.net"))
-        .license("MIT")
-        .version("0.1")
+        .description("Example CRUD to manage list of movies")
         .build();
   }
 }

@@ -1,10 +1,6 @@
-package net.jwierzbo.rest.api;
+package dev.karolkoltun.movie;
 
 import io.swagger.annotations.*;
-import net.jwierzbo.rest.exception.MovieNotFoundException;
-import net.jwierzbo.rest.model.Movie;
-import net.jwierzbo.rest.repository.MovieRepository;
-import net.jwierzbo.rest.repository.SimpleMovieRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "MovieController", description = "List of favourite Movies")
 @RestController
 @RequestMapping("/v2")
-public class MovieV2SwaggerController {
+public class MovieSwaggerController {
 
   private final MovieRepository movieRepository;
 
-  public MovieV2SwaggerController() {
+  public MovieSwaggerController() {
     movieRepository = new SimpleMovieRepository();
   }
 

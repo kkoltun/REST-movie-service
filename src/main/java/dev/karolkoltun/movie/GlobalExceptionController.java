@@ -1,6 +1,5 @@
-package net.jwierzbo.rest.api;
+package dev.karolkoltun.movie;
 
-import net.jwierzbo.rest.exception.MovieNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,6 +13,6 @@ public class GlobalExceptionController {
   @ExceptionHandler(MovieNotFoundException.class)
   @ResponseBody
   public String handleAllException(MovieNotFoundException ex) {
-    return "GLOBAL-application handler: " + ex.getMessage();
+    return "Exception happened: " + ex.getMessage();
   }
 }

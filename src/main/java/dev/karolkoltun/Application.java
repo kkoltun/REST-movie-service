@@ -1,4 +1,4 @@
-package net.jwierzbo.rest;
+package dev.karolkoltun;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

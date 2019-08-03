@@ -1,7 +1,5 @@
-package net.jwierzbo.rest.repository;
+package dev.karolkoltun.movie;
 
-import net.jwierzbo.rest.exception.MovieNotFoundException;
-import net.jwierzbo.rest.model.Movie;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -30,7 +28,7 @@ public class SimpleMovieRepository implements MovieRepository {
             counter.incrementAndGet(),
             "Taxi Driver",
             "Martin Scorsese",
-            LocalDate.of(1976, 02, 8)));
+            LocalDate.of(1976, 2, 8)));
   }
 
   public List<Movie> findAll() {

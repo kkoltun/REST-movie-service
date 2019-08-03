@@ -1,4 +1,4 @@
-package net.jwierzbo.rest.validation;
+package dev.karolkoltun.movie.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

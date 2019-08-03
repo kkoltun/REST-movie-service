@@ -1,15 +1,9 @@
-package net.jwierzbo.rest.api;
+package dev.karolkoltun.movie;
 
-import net.jwierzbo.rest.repository.MovieRepository;
-import net.jwierzbo.rest.repository.SimpleMovieRepository;
-import net.jwierzbo.rest.exception.MovieNotFoundException;
-import net.jwierzbo.rest.model.Movie;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /*
  * This is example of Validation flow in RestController
@@ -17,11 +11,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v3")
-public class MovieV3ValidController {
+public class MovieValidatedController {
 
   private MovieRepository movieRepository;
 
-  public MovieV3ValidController() {
+  public MovieValidatedController() {
     movieRepository = new SimpleMovieRepository();
   }
 
