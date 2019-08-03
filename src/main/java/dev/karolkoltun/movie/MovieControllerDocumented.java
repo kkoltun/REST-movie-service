@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @Api(value = "MovieController")
 @RestController
 @RequestMapping("/documented")
-public class MovieControllerSwagger {
+class MovieControllerDocumented {
 
   private final MovieRepository movieRepository;
 
-  public MovieControllerSwagger() {
+  MovieControllerDocumented() {
     movieRepository = new MovieRepositorySimple();
   }
 
@@ -37,7 +37,7 @@ public class MovieControllerSwagger {
   @ApiOperation(value = "Add a new movie", response = Movie.class)
   @ApiResponses(
       value = {
-        @ApiResponse(code = 400, message = "Invalid input"),
+        @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found")
       })
   @ApiImplicitParams({
@@ -65,7 +65,7 @@ public class MovieControllerSwagger {
 
   @ApiResponses(
       value = {
-        @ApiResponse(code = 400, message = "Invalid input"),
+        @ApiResponse(code = 400, message = "Bad Request"),
         @ApiResponse(code = 404, message = "Not Found")
       })
   @PutMapping("/movies/{id}")
