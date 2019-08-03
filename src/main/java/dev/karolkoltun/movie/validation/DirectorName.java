@@ -5,10 +5,10 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = NameValidator.class)
+@Constraint(validatedBy = DirectorNameValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Name {
+public @interface DirectorName {
 
   String message() default "{Name}";
 
